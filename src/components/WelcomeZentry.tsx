@@ -48,7 +48,7 @@ const WelcomeZentry = (props: Props) => {
         end: "+=1500",
         scrub: 1,
         pin: true,
-        markers: true,
+
         onEnter: () => setRotate(false),
         onLeaveBack: () => setRotate(true),
       },

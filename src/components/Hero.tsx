@@ -107,7 +107,7 @@ const Hero = (props: Props) => {
           <Button
             color="bg-yellow-300"
             title="Watch Trailer"
-            Icon={NearMeIcon}
+            RIghtIcon={NearMeIcon}
           />
         </div>
         <h1 className="absolute z-50 bottom-5 right-5 hero_head_styles text-white ">
