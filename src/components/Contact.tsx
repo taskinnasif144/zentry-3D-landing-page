@@ -15,7 +15,7 @@ const Contact = (props: Props) => {
   const itemImageRef = useRef<HTMLImageElement>(null);
   return (
     <div className="my-36 m-12 xl:my-12 rounded-lg bg-black py-24 relative h-[80vh] xl:h-auto flex items-center justify-center overflow-hidden">
-      <div className="text-blue-50 text-center ">
+      <div className="text-blue-50 text-center relative">
         <WordAfterWordAnimation header="Join zentry" />
         <WordAfterWrordHeader header="Let's build the <b> NEW era of <b> Gaming TOgether" />
         <div className="h-12"></div>

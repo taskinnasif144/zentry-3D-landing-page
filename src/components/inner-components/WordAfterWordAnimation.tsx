@@ -18,11 +18,11 @@ const WordAfterWordAnimation = ({ header }: Props) => {
       scrollTrigger: {
         trigger: headerRef.current,
         start: "top 80%",
-        end: "+=200",
+        end: "+=300",
         toggleActions: "play none none reverse",
       },
     });
-    timeLine.from("#word-stagger span", {
+    timeLine.to("#word-stagger", {
       opacity: 0,
       duration: 0.2,
       stagger: 0.2,

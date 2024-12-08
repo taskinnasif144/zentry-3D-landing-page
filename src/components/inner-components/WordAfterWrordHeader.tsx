@@ -14,32 +14,22 @@ const WordAfterWrordHeader = ({ header }: Props) => {
   const upperRef = useRef(null);
   const lowerRef = useRef(null);
   useGSAP(() => {
-    gsap.to(upperRef.current, {
+    gsap.from(upperRef.current, {
       scrollTrigger: {
         trigger: upperRef.current,
         start: "top 80%",
-        end: "+= 600",
+        end: "+=300",
         toggleActions: "play none none reverse",
       },
       rotateY: 24,
-      rotateX: 30,
-      duration: 0.8,
-      skewY: 10,
-      y: 200,
-      x: 200,
-      scale: 1.1,
-      transformOrigin: "right top",
-    });
-    gsap.to(".header-stagger", {
-      scrollTrigger: {
-        trigger: upperRef.current,
-        start: "top 80%",
-        end: "+= 600",
-        toggleActions: "play none none reverse",
-      },
       opacity: 0,
-      duration: 0.1,
-      stagger: 0.1,
+      rotateX: 30,
+      duration: 0.3,
+      skewY: 25,
+      y: 300,
+      x: 150,
+      scale: 0.8,
+      transformOrigin: "right top",
     });
   });
 
