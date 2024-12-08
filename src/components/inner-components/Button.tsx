@@ -16,14 +16,14 @@ const Button = ({ title, color, RIghtIcon, LeftIcon }: Props) => {
         <div className="absolute translate-y-[170%] skew-y-12 group-hover:translate-y-0 group-hover:skew-y-0 transition-all duration-300 ">
           <span className="flex gap-2">
             <span>{RIghtIcon && <RIghtIcon />}</span>
-            <span> {title}</span>
+            <span className="text-black"> {title}</span>
             <span>{LeftIcon && <LeftIcon />}</span>
           </span>
         </div>
         <div className="translate-y-0 skew-y-0 group-hover:translate-y-[-170%] group-hover:skew-y-12 transition-all duration-300">
           <span className="flex gap-2">
             <span> {RIghtIcon && <RIghtIcon />}</span>
-            {title}
+            <span className="text-black"> {title}</span>
             <span>{LeftIcon && <LeftIcon />}</span>
           </span>
         </div>

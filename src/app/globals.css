@@ -68,6 +68,24 @@ body {
   .floating-nav {
     @apply bg-black rounded-lg border;
   }
+
+  .story-img-mask {
+    @apply absolute bottom-[30%] md:bottom-[10%] h-[300px] sm:h-[450px] md:h-[650px] w-[70%] left-1/2 -translate-x-1/2 mix-blend-difference;
+    clip-path: polygon(4% 0, 83% 21%, 100% 73%, 0% 100%);
+  }
+
+  .contact-mask-1 {
+    @apply absolute -top-1/2 right-1/2 xl:right-[5%] xl:top-1/2 xl:-translate-y-1/2 translate-y-1/2 translate-x-1/2 xl:translate-x-0 z-10 mix-blend-plus-lighter;
+    clip-path: polygon(20% 0%, 100% 0, 83% 100%, 0% 100%);
+  }
+  .contact-mask-2 {
+    @apply absolute top-0 left-[10%] hidden xl:block;
+    clip-path: polygon(2% 0, 100% 0, 83% 100%, 21% 100%);
+  }
+  .contact-mask-3 {
+    @apply absolute bottom-0 left-1/2 -translate-x-1/2 xl:translate-x-0 xl:left-[8%];
+    clip-path: polygon(30% 9%, 100% 23%, 75% 100%, 0 100%);
+  }
 }
 
 @keyframes indicator-line {

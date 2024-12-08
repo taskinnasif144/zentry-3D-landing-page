@@ -1,5 +1,9 @@
+import Contact from "@/components/Contact";
+import Features from "@/components/Features";
+import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
+import Story from "@/components/Story";
 import WelcomeZentry from "@/components/WelcomeZentry";
 import Image from "next/image";
 
@@ -10,8 +14,10 @@ export default function Home() {
       <Hero />
       <WelcomeZentry />
       <section className="h-[430px] w-screen"></section>
-      <section className="h-screen w-screen bg-red-400"></section>
-      <section className="h-screen w-screen bg-green-300"></section>
+      <Features />
+      <Story />
+      <Contact />
+      <Footer />
     </main>
   );
 }
