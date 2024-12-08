@@ -93,7 +93,7 @@ const Hero = (props: Props) => {
                   className="size-80 object-cover object-center "
                   src={`videos/hero-${(currentIndex % 4) + 1}.mp4`}
                   onLoadedData={handleLoadedVideo}
-                  preload="auto"
+                  preload="metadata"
                 />
               </div>
             </MiniVideo>
@@ -105,7 +105,7 @@ const Hero = (props: Props) => {
             autoPlay
             loop
             muted
-            preload="auto"
+            preload="metadata"
             className="absolute-center object-cover invisible object-center size-96 z-20"
             onLoadedData={handleLoadedVideo}
           />
@@ -115,7 +115,7 @@ const Hero = (props: Props) => {
             loop
             muted
             className="absolute top-0 left-0 object-cover object-center size-full"
-            preload="auto"
+            preload="metadata"
             onLoadedData={handleLoadedVideo}
           />
         </div>
