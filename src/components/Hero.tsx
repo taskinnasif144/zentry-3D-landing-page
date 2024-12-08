@@ -8,6 +8,7 @@ import NearMeIcon from "@mui/icons-material/NearMe";
 
 import { ScrollTrigger } from "gsap/all";
 import MiniVideo from "./inner-components/MiniVIdeo";
+import Loader from "./inner-components/Loader";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -15,10 +16,23 @@ type Props = {};
 
 const Hero = (props: Props) => {
   const [currentIndex, setCurrentIndex] = useState(1);
-  const [isClicked, setIsClicked] = useState(false);
+  const [loadingState, setLoadingState] = useState(true);
+  const [loadedVideos, setLoadedVideos] = useState(0);
+
+  const handleLoadedVideo = () => {
+    console.log("loaded video");
+
+    setLoadedVideos((prev) => prev + 1);
+  };
+
+  useEffect(() => {
+    if (loadedVideos >= 3) {
+      setLoadingState(false);
+    }
+    console.log("loaded videos: ", loadedVideos);
+  }, [loadedVideos]);
 
   const nextVideo = () => {
-    setIsClicked(true);
     setCurrentIndex((prev) => (prev % 4) + 1);
   };
 
@@ -61,6 +75,7 @@ const Hero = (props: Props) => {
       },
     });
   });
+
   return (
     <div className="h-screen w-screen relative overflow-x-hidden">
       <div
@@ -77,6 +92,8 @@ const Hero = (props: Props) => {
                   onClick={nextVideo}
                   className="size-80 object-cover object-center "
                   src={`videos/hero-${(currentIndex % 4) + 1}.mp4`}
+                  onLoadedData={handleLoadedVideo}
+                  preload="auto"
                 />
               </div>
             </MiniVideo>
@@ -88,7 +105,9 @@ const Hero = (props: Props) => {
             autoPlay
             loop
             muted
+            preload="auto"
             className="absolute-center object-cover invisible object-center size-96 z-20"
+            onLoadedData={handleLoadedVideo}
           />
           <video
             src={`videos/hero-${currentIndex}.mp4`}
@@ -96,6 +115,8 @@ const Hero = (props: Props) => {
             loop
             muted
             className="absolute top-0 left-0 object-cover object-center size-full"
+            preload="auto"
+            onLoadedData={handleLoadedVideo}
           />
         </div>
 

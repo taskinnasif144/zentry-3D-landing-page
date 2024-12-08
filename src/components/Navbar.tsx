@@ -1,23 +1,58 @@
 "use client";
 
 import Image from "next/image";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Button from "./inner-components/Button";
 import NearMeIcon from "@mui/icons-material/NearMe";
-import Link from "next/link";
+import { useWindowScroll } from "react-use";
+import gsap from "gsap";
 
 const navLinks = ["Nexus", "Vault", "Prologue", "About", "Contact"];
 
 const Navbar = () => {
+  const audioRef = useRef(null);
   const navContainerRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState<number>(5);
+  const [audioPlaying, setAudioPlaying] = useState(false);
 
-  const handleMouseMove = (index: number) => {
-    setActiveIndex(index);
+  const { y: currentPositionY } = useWindowScroll();
+  const [isNavVisible, setIsNavVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  const handleAudio = () => {
+    if (audioPlaying) {
+      audioRef.current!.pause();
+      setAudioPlaying(false);
+    } else {
+      audioRef.current!.play();
+      setAudioPlaying(true);
+    }
   };
-  const handleMouseLeave = () => {
-    setActiveIndex(5);
-  };
+
+  useEffect(() => {
+    if (currentPositionY === 0) {
+      // Topmost position: show navbar without floating-nav
+      setIsNavVisible(true);
+      navContainerRef.current!.classList.remove("floating-nav");
+    } else if (currentPositionY > lastScrollY) {
+      // Scrolling down: hide navbar and apply floating-nav
+      setIsNavVisible(false);
+      navContainerRef.current!.classList.add("floating-nav");
+    } else if (currentPositionY < lastScrollY) {
+      // Scrolling up: show navbar with floating-nav
+      setIsNavVisible(true);
+      navContainerRef.current!.classList.add("floating-nav");
+    }
+
+    setLastScrollY(currentPositionY);
+  }, [currentPositionY, lastScrollY]);
+
+  useEffect(() => {
+    gsap.to(navContainerRef.current, {
+      y: isNavVisible ? 0 : -100,
+      opacity: isNavVisible ? 1 : 0,
+      duration: 0.2,
+    });
+  }, [isNavVisible]);
 
   return (
     <div
@@ -39,24 +74,32 @@ const Navbar = () => {
           <div className="flex h-full items-center">
             <div className="flex  items-center relative">
               {navLinks.map((link, i) => (
-                <Link
-                  onMouseMove={() => handleMouseMove(i)}
-                  onMouseLeave={handleMouseLeave}
-                  key={i}
-                  href={`#${link}`}
-                  className="nav-links"
-                >
+                <a key={i} id={link} href={`#${link}`} className="nav-links ">
                   {link}
-                </Link>
+                </a>
               ))}
-              <div
-                className={`transition-all duration-200  absolute top-0 h-full w-[90px] -z-50 rounded-e-full rounded-s-full ${
-                  activeIndex == 5
-                    ? ""
-                    : `left-[${activeIndex * 90}px]  bg-blue-50`
-                }`}
-              ></div>
+              <div className="animation"></div>
             </div>
+            <button
+              onClick={handleAudio}
+              className="ml-10 flex items-center space-x-0.5 h-full w-[50px]"
+            >
+              <audio
+                className="hidden"
+                ref={audioRef}
+                src="/audio/loop.mp3"
+                loop
+              />
+              {[1, 2, 3, 4, 5, 6, 7, 8].map((bar) => (
+                <div
+                  key={bar}
+                  className={`indicator-line ${audioPlaying && "active"}`}
+                  style={{
+                    animationDelay: `${bar * 0.1}s`,
+                  }}
+                />
+              ))}
+            </button>
           </div>
         </nav>
       </header>
