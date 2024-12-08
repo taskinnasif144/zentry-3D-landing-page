@@ -11,7 +11,7 @@ const navLinks = ["Nexus", "Vault", "Prologue", "About", "Contact"];
 
 const Navbar = () => {
   const audioRef = useRef(null);
-  const navContainerRef = useRef<HTMLAudioElement>(null);
+  const navContainerRef = useRef(null);
   const [audioPlaying, setAudioPlaying] = useState(false);
 
   const { y: currentPositionY } = useWindowScroll();
