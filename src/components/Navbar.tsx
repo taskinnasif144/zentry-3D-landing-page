@@ -22,10 +22,10 @@ const Navbar = () => {
     const audio = audioRef.current;
     if (!audio) return;
     if (audioPlaying) {
-      audio.pause();
+      (audio as HTMLAudioElement).pause();
       setAudioPlaying(false);
     } else {
-      audio.play();
+      (audio as HTMLAudioElement).play();
       setAudioPlaying(true);
     }
   };
